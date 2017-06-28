@@ -1,0 +1,64 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 10:33:35
+                                                             Page     1-1
+
+
+				;             лндскэ 2
+				
+				PUBLIC P2
+				
+ 0000				SD2  SEGMENT PARA PUBLIC 'DATA'
+ 0000  59			Y    DB   'Y'
+ 0001				SD2  ENDS
+				
+				     EXTRN X:BYTE
+				
+ 0000				SC2  SEGMENT PARA PUBLIC 'CODE'
+				     ASSUME CS:SC2,DS:SD2
+ 0000				P2   PROC FAR
+ 0000  8E C0			     MOV ES,AX
+ 0002  8A 1E 0000 R		       MOV BL,Y
+ 0006  26: 8A 0E 0000 E		       MOV CL,ES:X
+ 000B  88 0E 0000 R		       MOV Y,CL
+ 000F  26: 88 1E 0000 E		       MOV ES:X,BL
+ 0014  B4 02			     MOV AH,2
+ 0016  8A 16 0000 R		     MOV DL,Y
+ 001A  CD 21			     INT 21H
+ 001C  B4 4C			       MOV AH,4CH    ; ? RET
+ 001E  CD 21			       INT 21H
+ 0020				P2   ENDP
+ 0020				SC2  ENDS
+				     END 
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 10:33:35
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+SC2  . . . . . . . . . . . . . .  	0020	PARA	PUBLIC	'CODE'
+SD2  . . . . . . . . . . . . . .  	0001	PARA	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+P2 . . . . . . . . . . . . . . .  	F PROC	0000	SC2	Global	Length = 0020
+
+X  . . . . . . . . . . . . . . .  	V BYTE	0000		External
+
+Y  . . . . . . . . . . . . . . .  	L BYTE	0000	SD2
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  b		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     26 Source  Lines
+     26 Total   Lines
+     16 Symbols
+
+  46666 + 446370 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

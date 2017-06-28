@@ -1,0 +1,80 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 12:05:59
+                                                             Page     1-1
+
+
+ 0000				DSEG SEGMENT BYTE PUBLIC 'DATA'
+ 0000  09 03 07 1A 05 08	x	db	9,3,7,26,5,8
+ 0006				dseg	ends
+				
+ 0000				CSEG SEGMENT BYTE PUBLIC 'CODE'
+				assume	cs:cseg, ds:dseg, ss:sseg
+ 0000				main:
+ 0000  B8 ---- R			mov	ax,dseg
+ 0003  8E D8				mov	ds,ax
+ 0005  B9 0005				mov	cx,5
+ 0008  BB 0000 R			mov	bx,offset x
+ 000B				m0:
+ 000B  51				push	cx
+ 000C  BE 0005				mov	si,5
+ 000F				m1:
+ 000F  8A 20				mov	ah,[bx][si]
+ 0011  38 60 FF				cmp	[bx][si-1],ah
+ 0014  72 0C				jb	m2
+ 0016  8A 84 0000 R			mov	al,x[si]
+ 001A  86 84 FFFF R			xchg	al,x[si-1]
+ 001E  88 84 0000 R			mov	x[si],al
+ 0022				m2:
+ 0022  4E				dec	si
+ 0023  E2 EA				loop	m1
+ 0025  59				pop	cx
+ 0026  E2 E3				loop	m0
+				
+						
+				
+ 0028  B4 4C				mov	ah,4ch
+ 002A  CD 21				int	21h
+ 002C				cseg	ends
+				
+ 0000				SSEG SEGMENT BYTE STACK 'STACK'
+ 0000  0040[				dw	64 dup(0)
+	   0000			
+			 ]	
+				
+ 0080				sseg	ends
+					end main
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 12:05:59
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	002C	BYTE	PUBLIC	'CODE'
+DSEG . . . . . . . . . . . . . .  	0006	BYTE	PUBLIC	'DATA'
+SSEG . . . . . . . . . . . . . .  	0080	BYTE	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+M0 . . . . . . . . . . . . . . .  	L NEAR	000B	CSEG
+M1 . . . . . . . . . . . . . . .  	L NEAR	000F	CSEG
+M2 . . . . . . . . . . . . . . .  	L NEAR	0022	CSEG
+MAIN . . . . . . . . . . . . . .  	L NEAR	0000	CSEG
+
+X  . . . . . . . . . . . . . . .  	L BYTE	0000	DSEG
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  a		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     37 Source  Lines
+     37 Total   Lines
+     20 Symbols
+
+  46474 + 446562 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

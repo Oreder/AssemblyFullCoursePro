@@ -1,0 +1,18 @@
+PUBLIC P1
+
+SC0  SEGMENT PARA PUBLIC 'CODE'
+     ASSUME CS:SC0
+     
+P1   PROC NEAR
+
+    MOV AH, 2
+    MOV DL, '1'
+    INT 21H
+    
+    RET
+    
+P1   ENDP
+
+SC0  ENDS
+
+     END 

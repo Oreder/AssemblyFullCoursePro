@@ -1,0 +1,63 @@
+SSEG SEGMENT PARA STACK 'STACK'
+     DB 64 DUP('STACK+++')
+SSEG ENDS
+
+DSEG	SEGMENT 'DATA'
+KEY	DB	?
+I	DW	?
+J	DW	?
+ARR	DB	5,1,3,2,6,4
+DSEG	ENDS
+
+CSEG	SEGMENT 'CODE'
+ASSUME	CS:CSEG, DS:DSEG, SS:SSEG
+START:
+	MOV	AX,DSEG
+	MOV	DS,AX
+	
+	MOV CX, 0
+	
+	MOV J, 1
+M1:	MOV BX, J ; for
+	SUB BX, 6
+	JZ M4 ; выход из for
+	
+	MOV SI, J
+	MOV BX, 0
+	MOV BL, ARR[SI]
+	MOV KEY, BL
+	MOV BX, J
+	DEC BX
+	MOV I, BX
+	
+M2:	CMP I, 0 ; while
+	JL M3 ; выход из while
+	MOV SI, I
+	MOV CL, ARR[SI]
+	CMP CL, KEY
+	JLE M3 ; выход из while
+	
+	MOV DI, SI
+	INC DI
+	MOV CL, ARR[SI]
+	MOV ARR[DI], CL
+	DEC I
+	
+	JMP M2
+	
+M3:	MOV SI, I
+	INC SI
+	MOV CL, KEY
+	MOV ARR[SI], CL
+	
+	INC J
+	JMP M1
+	
+M4:	
+
+STOP:
+	MOV	AH,4Ch
+	INT	21h
+CSEG	ENDS
+
+	END	START

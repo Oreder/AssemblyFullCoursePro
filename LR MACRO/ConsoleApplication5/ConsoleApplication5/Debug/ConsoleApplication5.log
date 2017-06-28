@@ -1,0 +1,16 @@
+﻿Построение начато 19.05.2016 11:38:19.
+     1>Проект "D:\TEMP\Kuznetsov\LR MACRO\ConsoleApplication5\ConsoleApplication5\ConsoleApplication5.vcxproj" в узле 2 (целевые объекты Build).
+     1>_MASM:
+         Assembling PPSTART.ASM...
+         cmd.exe /C "C:\Users\User\AppData\Local\Temp\tmp8362936c7ce741e6a397d9ad5c631f16.cmd"
+         ml.exe /c /nologo /Zi /Fo"Debug\PPSTART.obj" /W3 /errorReport:prompt  /TaPPSTART.ASM
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\TEMP\Kuznetsov\LR MACRO\ConsoleApplication5\Debug\ConsoleApplication5.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\TEMP\Kuznetsov\LR MACRO\ConsoleApplication5\Debug\ConsoleApplication5.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\TEMP\Kuznetsov\LR MACRO\ConsoleApplication5\Debug\ConsoleApplication5.lib" /MACHINE:X86 Debug\ConsoleApplication5.obj
+         Debug\stdafx.obj
+         Debug\PPSTART.obj
+         ConsoleApplication5.vcxproj -> D:\TEMP\Kuznetsov\LR MACRO\ConsoleApplication5\Debug\ConsoleApplication5.exe
+     1>Построение проекта "D:\TEMP\Kuznetsov\LR MACRO\ConsoleApplication5\ConsoleApplication5\ConsoleApplication5.vcxproj" завершено (целевые объекты Build).
+
+Построение успешно завершено.
+
+Затраченное время: 00:00:00.42

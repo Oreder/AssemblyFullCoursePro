@@ -1,0 +1,158 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/31/16 12:40:19
+                                                             Page     1-1
+
+
+ 0000				SSEG SEGMENT PARA STACK 'STACK'
+ 0000  0040[			     DB 64 DUP('STACK+++')
+	   53 54 41 43 4B	
+	   2B 2B 2B		
+			 ]	
+				
+ 0200				SSEG ENDS
+				
+				PUBLIC X
+				
+				EXTRN P1:NEAR, P2:NEAR
+				
+ 0000				SD0  SEGMENT PARA PUBLIC 'DATA'
+				
+ 0000  0D 0A 20 20 2D 3D	MSG0	DB	13, 10, '  -= Menu =-', 13, 10
+       20 4D 65 6E 75 20	
+       3D 2D 0D 0A		
+ 0010  31 2E 20 4F 75 74	MSG1	DB	'1. Output X as unsigned binary
+				', 13, 10
+       70 75 74 20 58 20	
+       61 73 20 75 6E 73	
+       69 67 6E 65 64 20	
+       62 69 6E 61 72 79	
+       0D 0A			
+ 0030  32 2E 20 4F 75 74	MSG2	DB	'2. Output X as signed binary',
+				 13, 10
+       70 75 74 20 58 20	
+       61 73 20 73 69 67	
+       6E 65 64 20 62 69	
+       6E 61 72 79 0D 0A	
+ 004E  33 2E 20 4F 75 74	MSG3	DB	'3. Output X as unsigned binary
+				', 13, 10
+       70 75 74 20 58 20	
+       61 73 20 75 6E 73	
+       69 67 6E 65 64 20	
+       62 69 6E 61 72 79	
+       0D 0A			
+ 006E  34 2E 20 4F 75 74	MSG4	DB	'4. Output X as signed binary',
+				 13, 10
+       70 75 74 20 58 20	
+       61 73 20 73 69 67	
+       6E 65 64 20 62 69	
+       6E 61 72 79 0D 0A	
+ 008C  35 2E 20 4F 75 74	MSG5	DB	'5. Output X as unsigned hex', 
+				13, 10
+       70 75 74 20 58 20	
+       61 73 20 75 6E 73	
+       69 67 6E 65 64 20	
+       68 65 78 0D 0A		
+ 00A9  36 2E 20 4F 75 74	MSG6	DB	'6. Output X as signed hex', 13
+				, 10, '$'
+       70 75 74 20 58 20	
+       61 73 20 73 69 67	
+       6E 65 64 20 68 65	
+Microsoft (R) Macro Assembler Version 5.10                  3/31/16 12:40:19
+                                                             Page     1-2
+
+
+       78 0D 0A 24		
+				
+ 00C5  0000 E			PARR	DW	P1
+ 00C7  0000 E					DW	P2
+				
+ 00C9  0000			X    DW   ?
+				
+ 00CB				SD0  ENDS
+				
+				
+ 0000				SC0  SEGMENT PARA PUBLIC 'CODE'
+				     ASSUME CS:SC0, DS:SD0, SS:SSEG
+				     
+ 0000				P0   PROC FAR
+				
+ 0000  1E				PUSH  DS
+ 0001  B8 0000			    MOV  AX, 0
+ 0004  50			    PUSH  AX
+				
+ 0005  B8 ---- R		    MOV AX, SD0
+ 0008  8E D8			    MOV DS, AX
+				     
+ 000A  B4 09			M0:	MOV  AH, 9
+ 000C  BA 0000 R		    MOV  DX, OFFSET MSG0
+ 000F  CD 21			    INT  21H
+				    
+ 0011  B4 01			    MOV AH, 1
+ 0013  CD 21			    INT 21H
+				    
+ 0015  BB 0000			    MOV BX, 0
+ 0018  8A D8			    MOV BL, AL
+				    
+ 001A  80 FB 30			    CMP BL, '0'
+ 001D  74 0D			    JZ ME
+				    
+ 001F  80 EB 31			    SUB BL, '1'
+ 0022  8B F3			    MOV SI, BX
+ 0024  D1 E6			    SHL SI, 1
+				    
+ 0026  FF 94 00C5 R		    CALL WORD PTR PARR[SI]
+				    
+ 002A  EB DE			    JMP M0
+				    
+ 002C  CB			ME:	RET
+				     
+ 002D				P0   ENDP
+				
+ 002D				SC0  ENDS
+				
+				     END P0
+Microsoft (R) Macro Assembler Version 5.10                  3/31/16 12:40:19
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+SC0  . . . . . . . . . . . . . .  	002D	PARA	PUBLIC	'CODE'
+SD0  . . . . . . . . . . . . . .  	00CB	PARA	PUBLIC	'DATA'
+SSEG . . . . . . . . . . . . . .  	0200	PARA	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+M0 . . . . . . . . . . . . . . .  	L NEAR	000A	SC0
+ME . . . . . . . . . . . . . . .  	L NEAR	002C	SC0
+MSG0 . . . . . . . . . . . . . .  	L BYTE	0000	SD0
+MSG1 . . . . . . . . . . . . . .  	L BYTE	0010	SD0
+MSG2 . . . . . . . . . . . . . .  	L BYTE	0030	SD0
+MSG3 . . . . . . . . . . . . . .  	L BYTE	004E	SD0
+MSG4 . . . . . . . . . . . . . .  	L BYTE	006E	SD0
+MSG5 . . . . . . . . . . . . . .  	L BYTE	008C	SD0
+MSG6 . . . . . . . . . . . . . .  	L BYTE	00A9	SD0
+
+P0 . . . . . . . . . . . . . . .  	F PROC	0000	SC0	Length = 002D
+P1 . . . . . . . . . . . . . . .  	L NEAR	0000		External
+P2 . . . . . . . . . . . . . . .  	L NEAR	0000		External
+PARR . . . . . . . . . . . . . .  	L 0002	00C5	SD0
+
+X  . . . . . . . . . . . . . . .  	L WORD	00C9	SD0	Global
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  main		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     66 Source  Lines
+     66 Total   Lines
+     29 Symbols
+
+  46534 + 442455 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

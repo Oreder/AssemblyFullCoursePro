@@ -1,0 +1,120 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/24/16 12:18:40
+                                                             Page     1-1
+
+
+ 0000				SSEG SEGMENT PARA STACK 'STACK'
+ 0000  0040[			     DB 64 DUP('STACK+++')
+	   53 54 41 43 4B	
+	   2B 2B 2B		
+			 ]	
+				
+ 0200				SSEG ENDS
+				
+ 0000				DSEG	SEGMENT 'DATA'
+ 0000  00			KEY	DB	?
+ 0001  0000			I	DW	?
+ 0003  0000			J	DW	?
+ 0005  05 01 03 02 06 04	ARR	DB	5,1,3,2,6,4
+ 000B				DSEG	ENDS
+				
+ 0000				CSEG	SEGMENT 'CODE'
+				ASSUME	CS:CSEG, DS:DSEG, SS:SSEG
+ 0000				START:
+ 0000  B8 ---- R			MOV	AX,DSEG
+ 0003  8E D8				MOV	DS,AX
+					
+ 0005  B9 0000				MOV CX, 0
+					
+ 0008  C7 06 0003 R 0001		MOV J, 1
+ 000E  8B 1E 0003 R		M1:	MOV BX, J
+ 0012  83 EB 06				SUB BX, 6
+ 0015  74 51				JZ M4 ; выход из for
+					
+ 0017  8B 36 0003 R			MOV SI, J
+ 001B  BB 0000				MOV BX, 0
+ 001E  8A 9C 0005 R			MOV BL, ARR[SI]
+ 0022  88 1E 0000 R			MOV KEY, BL
+ 0026  8B 1E 0003 R			MOV BX, J
+ 002A  4B				DEC BX
+ 002B  89 1E 0001 R			MOV I, BX
+					
+ 002F  83 3E 0001 R 00		M2:	CMP I, 0
+ 0034  7C 1F				JL M3 ; выход из while
+ 0036  8B 36 0001 R			MOV SI, I
+ 003A  8A 8C 0005 R			MOV CL, ARR[SI]
+ 003E  3A 0E 0000 R			CMP CL, KEY
+ 0042  7E 11				JLE M3 ; выход из while
+					
+ 0044  8B FE				MOV DI, SI
+ 0046  47				INC DI
+ 0047  8A 8C 0005 R			MOV CL, ARR[SI]
+ 004B  88 8D 0005 R			MOV ARR[DI], CL
+ 004F  FF 0E 0001 R			DEC I
+					
+ 0053  EB DA				JMP M2
+					
+ 0055  8B 36 0001 R		M3:	MOV SI, I
+ 0059  46				INC SI
+ 005A  8A 0E 0000 R			MOV CL, KEY
+Microsoft (R) Macro Assembler Version 5.10                  3/24/16 12:18:40
+                                                             Page     1-2
+
+
+ 005E  88 8C 0005 R			MOV ARR[SI], CL
+					
+ 0062  FF 06 0003 R			INC J
+ 0066  EB A6				JMP M1
+					
+ 0068				M4:	
+				
+ 0068				STOP:
+ 0068  B4 4C				MOV	AH,4Ch
+ 006A  CD 21				INT	21h
+ 006C				CSEG	ENDS
+				
+					END	START
+Microsoft (R) Macro Assembler Version 5.10                  3/24/16 12:18:40
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	006C	PARA	NONE	'CODE'
+DSEG . . . . . . . . . . . . . .  	000B	PARA	NONE	'DATA'
+SSEG . . . . . . . . . . . . . .  	0200	PARA	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+ARR  . . . . . . . . . . . . . .  	L BYTE	0005	DSEG
+
+I  . . . . . . . . . . . . . . .  	L WORD	0001	DSEG
+
+J  . . . . . . . . . . . . . . .  	L WORD	0003	DSEG
+
+KEY  . . . . . . . . . . . . . .  	L BYTE	0000	DSEG
+
+M1 . . . . . . . . . . . . . . .  	L NEAR	000E	CSEG
+M2 . . . . . . . . . . . . . . .  	L NEAR	002F	CSEG
+M3 . . . . . . . . . . . . . . .  	L NEAR	0055	CSEG
+M4 . . . . . . . . . . . . . . .  	L NEAR	0068	CSEG
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CSEG
+STOP . . . . . . . . . . . . . .  	L NEAR	0068	CSEG
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  a		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     63 Source  Lines
+     63 Total   Lines
+     25 Symbols
+
+  46550 + 444438 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

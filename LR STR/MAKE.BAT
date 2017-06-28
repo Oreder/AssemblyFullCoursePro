@@ -1,0 +1,4 @@
+tasm32 PPSTART.ASM
+tasm32 SETCLER.ASM
+tasm32 COUNT.ASM
+tasm32 A-B.ASM

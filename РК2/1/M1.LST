@@ -1,0 +1,66 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/17/16 12:01:07
+                                                             Page     1-1
+
+
+ 0000				SSEG SEGMENT PARA STACK 'STACK'
+ 0000  0040[			     DB 64 DUP('STACK+++')
+	   53 54 41 43 4B	
+	   2B 2B 2B		
+			 ]	
+				
+ 0200				SSEG ENDS
+				
+				PUBLIC X
+				
+ 0000				SD1  SEGMENT PARA PUBLIC 'DATA'
+ 0000  52			X    DB   'R'
+ 0001				SD1  ENDS
+				
+				EXTRN P2:FAR
+				
+ 0000				SC1  SEGMENT PARA PUBLIC 'CODE'
+				     ASSUME CS:SC1,DS:SD1,SS:SSEG
+ 0000				P1   PROC FAR
+ 0000  B8 0000			     MOV AX,0
+ 0003  1E			     PUSH DS
+ 0004  50			     PUSH AX
+ 0005  B8 ---- R		     MOV AX,SD1
+ 0008  EA 0000 ---- E		     JMP P2
+ 000D				P1   ENDP
+ 000D				SC1  ENDS
+				
+				     END P1
+Microsoft (R) Macro Assembler Version 5.10                  3/17/16 12:01:07
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+SC1  . . . . . . . . . . . . . .  	000D	PARA	PUBLIC	'CODE'
+SD1  . . . . . . . . . . . . . .  	0001	PARA	PUBLIC	'DATA'
+SSEG . . . . . . . . . . . . . .  	0200	PARA	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+P1 . . . . . . . . . . . . . . .  	F PROC	0000	SC1	Length = 000D
+P2 . . . . . . . . . . . . . . .  	L FAR 	0000		External
+
+X  . . . . . . . . . . . . . . .  	L BYTE	0000	SD1	Global
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  m1		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     24 Source  Lines
+     24 Total   Lines
+     18 Symbols
+
+  46688 + 446348 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

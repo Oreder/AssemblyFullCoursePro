@@ -1,0 +1,51 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/31/16 12:40:19
+                                                             Page     1-1
+
+
+				PUBLIC P2
+				
+ 0000				SC0  SEGMENT PARA PUBLIC 'CODE'
+				     ASSUME CS:SC0
+				     
+ 0000				P2   PROC NEAR
+				
+ 0000  B4 02			    MOV AH, 2
+ 0002  B2 32			    MOV DL, '2'
+ 0004  CD 21			    INT 21H
+				    
+ 0006  C3			    RET
+				    
+ 0007				P2   ENDP
+				
+ 0007				SC0  ENDS
+				
+				     END 
+Microsoft (R) Macro Assembler Version 5.10                  3/31/16 12:40:19
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+SC0  . . . . . . . . . . . . . .  	0007	PARA	PUBLIC	'CODE'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+P2 . . . . . . . . . . . . . . .  	N PROC	0000	SC0	Global	Length = 0007
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  p2		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     18 Source  Lines
+     18 Total   Lines
+     12 Symbols
+
+  46730 + 446306 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

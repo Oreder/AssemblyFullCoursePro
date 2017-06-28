@@ -1,0 +1,40 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 10:38:36
+                                                             Page     1-1
+
+
+				;             лндскэ 2
+				
+ 0000				SD1  SEGMENT PARA PUBLIC 'DATA'
+				     PUBLIC Y
+ 0000  59			Y    DB   'Y'
+ 0001				SD1  ENDS
+				     END
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 10:38:36
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+SD1  . . . . . . . . . . . . . .  	0001	PARA	PUBLIC	'DATA'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+Y  . . . . . . . . . . . . . . .  	L BYTE	0000	SD1	Global
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  b		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+      7 Source  Lines
+      7 Total   Lines
+     12 Symbols
+
+  46780 + 446256 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

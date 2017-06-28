@@ -1,0 +1,103 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 11:57:26
+                                                             Page     1-1
+
+
+ 0000				DSEG SEGMENT BYTE PUBLIC 'DATA'
+ 0000  0006			NMAX	DW	6
+ 0002  0006			N	DW	6
+ 0004  31 32 33 34 35 36	X1	DB	'123456'
+ 000A  31 32 33 34 35 36	X2	DB	'123456'
+ 0010  31 32 33 34 35 36	X3	DB	'123456'
+ 0016  31 32 33 34 35 36	X4	DB	'123456'
+ 001C  31 32 33 34 35 36	X5	DB	'123456'
+ 0022  31 32 33 34 35 36	X6	DB	'123456'
+ 0028				DSEG	ENDS
+				
+ 0000				SSEG SEGMENT BYTE STACK 'STACK'
+ 0000  0040[				DW	64 DUP(0)
+	   0000			
+			 ]	
+				
+ 0080				SSEG	ENDS
+				
+ 0000				CSEG SEGMENT BYTE PUBLIC 'CODE'
+				ASSUME	CS:CSEG, DS:DSEG, SS:SSEG
+ 0000				START:
+ 0000  B8 ---- R			MOV	AX,DSEG
+ 0003  8E D8				MOV	DS,AX
+ 0005  BB 0001				MOV	BX,1    
+ 0008  8B 16 0000 R			MOV	DX,NMAX 
+ 000C  8B 0E 0002 R			MOV	CX,N
+ 0010  49				DEC	CX
+ 0011				M1:	
+ 0011  51				PUSH	CX
+					
+ 0012  8B F3				MOV	SI,BX 
+ 0014  8B FA				MOV	DI,DX 
+ 0016				M2:
+ 0016  8A 84 0004 R			MOV	AL,X1[SI]
+ 001A  86 85 0004 R			XCHG	AL,X1[DI]
+ 001E  86 84 0004 R			XCHG	AL,X1[SI]
+ 0022  03 3E 0000 R			ADD	DI,NMAX
+ 0026  46				INC	SI    
+ 0027  E2 ED				LOOP	M2
+ 0029  03 16 0000 R			ADD	DX,NMAX
+ 002D  42				INC	DX
+ 002E  03 1E 0000 R			ADD	BX,NMAX
+ 0032  43				INC	BX
+ 0033  59				POP	CX
+ 0034  E2 DB				LOOP	M1	
+				
+				
+ 0036				STOP:
+ 0036  B4 4C				MOV	AH,4Ch
+ 0038  CD 21				INT	21h
+ 003A				CSEG	ENDS
+				
+				
+					END	START
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 11:57:26
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	003A	BYTE	PUBLIC	'CODE'
+DSEG . . . . . . . . . . . . . .  	0028	BYTE	PUBLIC	'DATA'
+SSEG . . . . . . . . . . . . . .  	0080	BYTE	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+M1 . . . . . . . . . . . . . . .  	L NEAR	0011	CSEG
+M2 . . . . . . . . . . . . . . .  	L NEAR	0016	CSEG
+
+N  . . . . . . . . . . . . . . .  	L WORD	0002	DSEG
+NMAX . . . . . . . . . . . . . .  	L WORD	0000	DSEG
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CSEG
+STOP . . . . . . . . . . . . . .  	L NEAR	0036	CSEG
+
+X1 . . . . . . . . . . . . . . .  	L BYTE	0004	DSEG
+X2 . . . . . . . . . . . . . . .  	L BYTE	000A	DSEG
+X3 . . . . . . . . . . . . . . .  	L BYTE	0010	DSEG
+X4 . . . . . . . . . . . . . . .  	L BYTE	0016	DSEG
+X5 . . . . . . . . . . . . . . .  	L BYTE	001C	DSEG
+X6 . . . . . . . . . . . . . . .  	L BYTE	0022	DSEG
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  a		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     51 Source  Lines
+     51 Total   Lines
+     27 Symbols
+
+  46550 + 444438 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

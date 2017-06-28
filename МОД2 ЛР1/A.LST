@@ -1,0 +1,118 @@
+Microsoft (R) Macro Assembler Version 5.10                  4/14/16 12:32:21
+                                                             Page     1-1
+
+
+ 0000				SSEG SEGMENT PARA STACK 'STACK'
+ 0000  0040[			     DB 64 DUP('STACK+++')
+	   53 54 41 43 4B	
+	   2B 2B 2B		
+			 ]	
+				
+ 0200				SSEG ENDS
+				
+				
+ 0000				DSEG	SEGMENT 'DATA'
+				
+ 0000  0004			N DW 4
+ 0002  0000			R DW ?
+				
+ 0004				DSEG	ENDS
+				
+				
+ 0000				CSEG	SEGMENT 'CODE'
+				ASSUME	CS:CSEG, DS:DSEG, SS:SSEG
+				
+				
+ 0000				FACTORIAL PROC NEAR
+ 0000  55				PUSH BP
+ 0001  8B EC				MOV BP, SP
+ 0003  8B 46 04				MOV AX, SS:[BP + 4]
+ 0006  8B 4E 06				MOV CX, SS:[BP + 6]
+					
+ 0009  3D 0001				CMP AX, 1
+ 000C  74 13				JE RESULT
+					
+ 000E  50				PUSH AX
+ 000F  48				DEC AX
+					
+ 0010  51				PUSH CX
+ 0011  50				PUSH AX
+ 0012  E8 0000 R			CALL FACTORIAL
+ 0015  83 C4 04				ADD SP, 4
+					
+ 0018  5B				POP BX
+ 0019  F7 E3				MUL BX
+ 001B  56				PUSH SI
+ 001C  8B F1				MOV SI, CX
+ 001E  89 04				MOV WORD PTR[SI], AX
+ 0020  5E				POP SI
+				
+ 0021				RESULT:
+ 0021  5D				POP BP
+ 0022  C3				RET
+					
+ 0023				FACTORIAL ENDP
+				
+				
+ 0023				START:
+ 0023  B8 ---- R			MOV	AX,DSEG
+Microsoft (R) Macro Assembler Version 5.10                  4/14/16 12:32:21
+                                                             Page     1-2
+
+
+ 0026  8E D8				MOV	DS,AX
+					
+ 0028  B8 0002 R			MOV AX, OFFSET R
+ 002B  50				PUSH AX	
+ 002C  A1 0000 R			MOV AX, N
+ 002F  50				PUSH AX
+ 0030  E8 0000 R			CALL FACTORIAL
+ 0033  83 C4 04				ADD SP, 4
+					
+ 0036				STOP:
+ 0036  B4 4C				MOV	AH,4Ch
+ 0038  CD 21				INT	21h
+					
+				
+ 003A				CSEG	ENDS
+				
+					END	START
+Microsoft (R) Macro Assembler Version 5.10                  4/14/16 12:32:21
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CSEG . . . . . . . . . . . . . .  	003A	PARA	NONE	'CODE'
+DSEG . . . . . . . . . . . . . .  	0004	PARA	NONE	'DATA'
+SSEG . . . . . . . . . . . . . .  	0200	PARA	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+FACTORIAL  . . . . . . . . . . .  	N PROC	0000	CSEG	Length = 0023
+
+N  . . . . . . . . . . . . . . .  	L WORD	0000	DSEG
+
+R  . . . . . . . . . . . . . . .  	L WORD	0002	DSEG
+RESULT . . . . . . . . . . . . .  	L NEAR	0021	CSEG
+
+START  . . . . . . . . . . . . .  	L NEAR	0023	CSEG
+STOP . . . . . . . . . . . . . .  	L NEAR	0036	CSEG
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  a		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     67 Source  Lines
+     67 Total   Lines
+     21 Symbols
+
+  46474 + 446562 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

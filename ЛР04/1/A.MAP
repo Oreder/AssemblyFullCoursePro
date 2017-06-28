@@ -1,0 +1,7 @@
+
+ Start  Stop   Length Name                   Class
+ 00000H 00001H 00002H SD1                    DATA
+ 00010H 0020FH 00200H SSEG                   STACK
+ 00300H 00327H 00028H SC1                    CODE
+
+Program entry point at 0030:0000

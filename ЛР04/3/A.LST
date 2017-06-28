@@ -1,0 +1,92 @@
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 10:31:00
+                                                             Page     1-1
+
+
+				;             лндскэ 1
+ 0000				SD1  SEGMENT PARA PUBLIC 'DATA'
+				     EXTRN Y:BYTE
+ 0000  58			X    DB   'X'
+ 0001				SD1  ENDS
+				
+ 0000				SD2  SEGMENT PARA PUBLIC 'DATA'
+				     EXTRN Q:BYTE
+ 0000  50			P    DB   'P'
+ 0001				SD2  ENDS
+				
+ 0000				SC1  SEGMENT PARA PUBLIC 'CODE'
+				     ASSUME CS:SC1,DS:SD1,SS:SSEG
+ 0000				P1   PROC FAR
+ 0000  B8 ---- R		     MOV AX,SD1
+ 0003  8E D8			     MOV DS,AX
+ 0005  8A 1E 0000 E		       MOV BL,Y
+ 0009  8A 0E 0000 R		       MOV CL,X
+ 000D  88 0E 0000 E		       MOV Y,CL
+ 0011  88 1E 0000 R		       MOV X,BL
+ 0015  B4 02			     MOV AH,2
+ 0017  8A 16 0000 R		     MOV DL,X
+ 001B  CD 21			     INT 21H
+				
+				       ASSUME DS:SD2
+ 001D  B8 ---- R		     MOV AX,SD2
+ 0020  8E D8			     MOV DS,AX
+ 0022  8A 1E 0000 E		       MOV BL,Q
+ 0026  8A 0E 0000 R		       MOV CL,P
+ 002A  88 0E 0000 E		       MOV Q,CL
+ 002E  88 1E 0000 R		       MOV P,BL
+ 0032  B4 02			     MOV AH,2
+ 0034  8A 16 0000 R		     MOV DL,P
+ 0038  CD 21			     INT 21H
+				
+ 003A  B4 4C			       MOV AH,4CH
+ 003C  CD 21			       INT 21H
+ 003E				P1   ENDP
+ 003E				SC1  ENDS
+				
+ 0000				SSEG SEGMENT PARA STACK 'STACK'
+ 0000  0040[			     DB 64 DUP('STACK+++')
+	   53 54 41 43 4B	
+	   2B 2B 2B		
+			 ]	
+				
+ 0200				SSEG ENDS
+				
+				     END P1
+Microsoft (R) Macro Assembler Version 5.10                  3/10/16 10:31:00
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+SC1  . . . . . . . . . . . . . .  	003E	PARA	PUBLIC	'CODE'
+SD1  . . . . . . . . . . . . . .  	0001	PARA	PUBLIC	'DATA'
+SD2  . . . . . . . . . . . . . .  	0001	PARA	PUBLIC	'DATA'
+SSEG . . . . . . . . . . . . . .  	0200	PARA	STACK	'STACK'
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+P  . . . . . . . . . . . . . . .  	L BYTE	0000	SD2
+P1 . . . . . . . . . . . . . . .  	F PROC	0000	SC1	Length = 003E
+
+Q  . . . . . . . . . . . . . . .  	V BYTE	0000	SD2	External
+
+X  . . . . . . . . . . . . . . .  	L BYTE	0000	SD1
+
+Y  . . . . . . . . . . . . . . .  	V BYTE	0000	SD1	External
+
+@CPU . . . . . . . . . . . . . .  	TEXT  0101h		
+@FILENAME  . . . . . . . . . . .  	TEXT  a		
+@VERSION . . . . . . . . . . . .  	TEXT  510		
+
+
+     45 Source  Lines
+     45 Total   Lines
+     21 Symbols
+
+  46702 + 446334 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

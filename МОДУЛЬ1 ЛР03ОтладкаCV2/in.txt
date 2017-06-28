@@ -1,0 +1,13 @@
+BC *
+BP M1 "R;W;G"
+BP M2 "R;W;G"
+BP M3 "R;W;G"
+BP M4 "R;W;G"
+BP M5 "R;W;G"
+BP M6 "R;W;G"
+Y*
+WB K
+L
+T>out.txt
+G
+

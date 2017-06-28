@@ -1,0 +1,13 @@
+save_regs macro regs
+
+irp reg, regs
+
+ifdifi <reg>, <F>
+push reg
+else
+pushf
+endif
+
+endm
+
+endm
